@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd2hllyc6pjpr"]
+
+[ext_resource type="Script" path="res://Enemie.gd" id="1_3tnyv"]
+[ext_resource type="Texture2D" uid="uid://ch5ti7w7ktnp4" path="res://resources/characters/sheets/DinoSprites - mort.png" id="2_1teo2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sblvt"]
+size = Vector2(17, 19)
+
+[node name="Enemie" type="RigidBody2D" node_paths=PackedStringArray("floor_detect")]
+script = ExtResource("1_3tnyv")
+floor_detect = NodePath("RayCast2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 16
+visibility_layer = 0
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_sblvt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1teo2")
+hframes = 24
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(13, 14)

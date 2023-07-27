@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3454wssu8q8a"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_x4q8b"]
+[ext_resource type="PackedScene" uid="uid://cbcs3daelmlmy" path="res://scenes/player.tscn" id="1_xieed"]
+[ext_resource type="PackedScene" uid="uid://o5q4qadh83vw" path="res://scenes/map.tscn" id="2_mi5vm"]
+[ext_resource type="PackedScene" uid="uid://sqckm3mhujc3" path="res://scenes/light.tscn" id="3_p0v0p"]
+[ext_resource type="PackedScene" uid="uid://doa11akoysikh" path="res://scenes/ui.tscn" id="5_xy10v"]
+[ext_resource type="PackedScene" uid="uid://bwfgfpdbough3" path="res://scenes/game_over_screan.tscn" id="6_fi5uh"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_x4q8b")
+
+[node name="Map" parent="." instance=ExtResource("2_mi5vm")]
+position = Vector2(96, 41)
+
+[node name="Player" parent="." instance=ExtResource("1_xieed")]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(19, 130)
+
+[node name="Light" parent="." instance=ExtResource("3_p0v0p")]
+position = Vector2(19, 91)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.685, 2.685)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("5_xy10v")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="GameOverScrean" parent="CanvasLayer2" instance=ExtResource("6_fi5uh")]
+visible = false

@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3454wssu8q8a"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_x4q8b"]
+[ext_resource type="PackedScene" uid="uid://cbcs3daelmlmy" path="res://scenes/player.tscn" id="1_xieed"]
+[ext_resource type="PackedScene" uid="uid://o5q4qadh83vw" path="res://scenes/map.tscn" id="2_mi5vm"]
+[ext_resource type="PackedScene" uid="uid://sqckm3mhujc3" path="res://scenes/light.tscn" id="3_p0v0p"]
+[ext_resource type="PackedScene" uid="uid://bnbwawom37pkj" path="res://scenes/darkness.tscn" id="4_s25pt"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_x4q8b")
+
+[node name="Player" parent="." instance=ExtResource("1_xieed")]
+position = Vector2(144, 141)
+
+[node name="Map" parent="." instance=ExtResource("2_mi5vm")]
+position = Vector2(96, 41)
+
+[node name="Darkness" parent="." instance=ExtResource("4_s25pt")]
+position = Vector2(204, 71)
+
+[node name="Light" parent="." instance=ExtResource("3_p0v0p")]
+position = Vector2(81, 98)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.685, 2.685)
+
+[connection signal="body_entered" from="Light" to="Darkness" method="_on_light_body_entered"]
+[connection signal="body_exited" from="Light" to="Darkness" method="_on_light_body_exited"]
