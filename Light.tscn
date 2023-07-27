@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqykxi26gpt0f"]
+
+[ext_resource type="Texture2D" uid="uid://b6pt6uunonbq6" path="res://Sprites/light.png" id="1_igaal"]
+[ext_resource type="Script" path="res://Light.gd" id="2_j3a0b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjj48"]
+radius = 130.25
+
+[node name="PointLight2D" type="PointLight2D" node_paths=PackedStringArray("ray_cast", "area")]
+position = Vector2(250, -80)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("1_igaal")
+script = ExtResource("2_j3a0b")
+ray_cast = NodePath("RayCast2D")
+area = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cjj48")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 130)
+collision_mask = 5
