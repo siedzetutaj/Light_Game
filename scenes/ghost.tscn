@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cttbpbthh46x"]
+
+[ext_resource type="Texture2D" uid="uid://his0lsbxle83" path="res://resources/tiles/Sprites/imgbin_pixel-art-ghost-png.png" id="1_o75q3"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="2_0vmc0"]
+
+[node name="Ghost" type="Sprite2D"]
+texture = ExtResource("1_o75q3")
+script = ExtResource("2_0vmc0")
