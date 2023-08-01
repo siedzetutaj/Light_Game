@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://by5ech5yi8hdv"]
+
+[ext_resource type="Shader" path="res://test.gdshader" id="1_vf4ti"]
+[ext_resource type="Texture2D" uid="uid://c6o3ydg4xvgo0" path="res://resources/tiles/Sprites/12-Live and Coins/Numbers (6x8).png" id="2_mx3ni"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_17wt4"]
+shader = ExtResource("1_vf4ti")
+shader_parameter/levels = 6
+shader_parameter/spread = -0.87
+
+[node name="Sprite2D" type="Sprite2D"]
+material = SubResource("ShaderMaterial_17wt4")
+position = Vector2(627.656, 379.859)
+scale = Vector2(10.5115, 18.2852)
+texture = ExtResource("2_mx3ni")
