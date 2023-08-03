@@ -1,24 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://sqckm3mhujc3"]
+[gd_scene load_steps=8 format=3 uid="uid://sqckm3mhujc3"]
 
 [ext_resource type="Script" path="res://scenes/light.gd" id="1_oik8l"]
 [ext_resource type="Texture2D" uid="uid://bumedunh1pprl" path="res://resources/tiles/Sprites/14-TileSets/light.png" id="2_8hrxm"]
+[ext_resource type="Texture2D" uid="uid://cxgt7pq60cwj4" path="res://resources/tiles/Sprites/12-Live and Coins/spotlight.PNG" id="3_3ephc"]
+[ext_resource type="Script" path="res://scenes/spotlight.gd" id="3_8qxrw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i18xn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fgr45"]
 radius = 4.24264
 
-[sub_resource type="GDScript" id="GDScript_lm3yl"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_xsk53"]
 radius = 55.0
 
-[node name="light" type="CharacterBody2D" node_paths=PackedStringArray("ray_cast", "area")]
+[node name="light" type="CharacterBody2D" node_paths=PackedStringArray("ray_cast", "spot_ray_cast", "area", "spot_area")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_oik8l")
-ray_cast = NodePath("RayCast2D")
-area = NodePath("Area2D")
+ray_cast = NodePath("bulbLight/RayCast2D")
+spot_ray_cast = NodePath("RayCast2D2")
+area = NodePath("bulbLight")
+spot_area = NodePath("spotlight")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
@@ -27,19 +29,49 @@ material = SubResource("CanvasItemMaterial_i18xn")
 shape = SubResource("CircleShape2D_fgr45")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="bulbLight" type="Area2D" parent="."]
+visible = false
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bulbLight"]
+shape = SubResource("CircleShape2D_xsk53")
+
+[node name="RayCast2D" type="RayCast2D" parent="bulbLight"]
+target_position = Vector2(0, 54)
+collision_mask = 513
+hit_from_inside = true
+
+[node name="PointLight2D" type="PointLight2D" parent="bulbLight"]
 scale = Vector2(0.515625, 0.550781)
 shadow_enabled = true
 texture = ExtResource("2_8hrxm")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-collision_mask = 513
-hit_from_inside = true
-script = SubResource("GDScript_lm3yl")
-
-[node name="Area2D" type="Area2D" parent="."]
+[node name="spotlight" type="Area2D" parent="."]
 collision_layer = 512
 collision_mask = 512
+script = ExtResource("3_8qxrw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_xsk53")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="spotlight"]
+position = Vector2(-0.5, 123.235)
+scale = Vector2(1, 1.67457)
+polygon = PackedVector2Array(0.5, -73.592, -82.5, 141.5, 85.5, 141.5)
+
+[node name="PointLight2D" type="PointLight2D" parent="spotlight"]
+position = Vector2(0.999923, 2.53521)
+scale = Vector2(0.141638, 0.633803)
+energy = 2.0
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = ExtResource("3_3ephc")
+offset = Vector2(0, 280)
+
+[node name="PointLight2D2" type="PointLight2D" parent="spotlight"]
+scale = Vector2(0.0332031, 0.0332031)
+energy = 10.2
+shadow_enabled = true
+texture = ExtResource("2_8hrxm")
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+collision_mask = 513
+hit_from_inside = true
